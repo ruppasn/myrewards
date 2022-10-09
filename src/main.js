@@ -1,6 +1,6 @@
 import {toInteger} from 'lodash';
 import React, {useState} from 'react';
-import {ScrollView, Text} from 'react-native';
+import {ScrollView, Text, TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 import FeedsList from './components/FeedsList';
 import NewRewardForm from './components/RewardForm';
@@ -39,7 +39,13 @@ export const StyledAmount = styled.Text`
   font-weight: bold;
 `;
 export const addBtnStyle = {
-  containerStyle: {position: 'absolute', bottom: 30, right: 30},
+  containerStyle: {
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
+    width: 70,
+    height: 70,
+  },
 };
 const Main = () => {
   const [showRewardForm, setShowRewardForm] = useState(false);
@@ -67,14 +73,6 @@ const Main = () => {
           <AltirTabItem>
             <>
               <FeedsList feeds={[...feeds, ...sampleFeeds]} />
-              <AltirButton
-                width={70}
-                onPress={() => {
-                  setShowRewardForm(true);
-                }}
-                icon={<AltirIcon name="add" size={30} />}
-                {...addBtnStyle}
-              />
             </>
           </AltirTabItem>
           <AltirTabItem>
@@ -82,6 +80,14 @@ const Main = () => {
           </AltirTabItem>
         </AltirTabs>
       </ContentSection>
+
+      <AltirButton
+        onPress={() => {
+          setShowRewardForm(true);
+        }}
+        icon={<AltirIcon name="add" size={30} />}
+        {...addBtnStyle}
+      />
       {showRewardForm ? (
         <NewRewardForm
           onClose={() => {

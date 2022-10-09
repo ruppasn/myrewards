@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Alert} from 'react-native';
 import styled from 'styled-components';
 import AltirButton from '../../core/AltirButton';
 import AltirIcon from '../../core/AltirIcon';
@@ -79,8 +80,14 @@ const NewRewardForm = ({onClose, onSubmit}) => {
 
       <AltirButton
         onPress={() => {
-          onSubmit({name: to, amount, message});
-          onClose();
+          if (amount && to && message) {
+            onSubmit({name: to, amount, message});
+            onClose();
+          } else {
+            Alert.alert(
+              'Please fill the form to save or press cancel to go back',
+            );
+          }
         }}
         title="Give"
         light
